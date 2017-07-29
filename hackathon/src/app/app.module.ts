@@ -21,6 +21,7 @@ import { ArtigoService } from './cadastrar-editar-artigo/artigo.service';
 
 import { CadastroService } from "./cadastro-usuario/cadastro.service";
 import { ChatComponent } from './chat/chat.component';
+import { EditarArtigoComponent } from './cadastrar-editar-artigo/editar-artigo/editar-artigo.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { ChatComponent } from './chat/chat.component';
     HomeComponent,
     ChatComponent,
     CadastroUsuario,
-    ArtigosDestaqueComponent
+    ArtigosDestaqueComponent,
+	EditarArtigoComponent
   ],
   imports: [
     BrowserModule,

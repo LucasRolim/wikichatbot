@@ -5,6 +5,7 @@ function Service() {
     this.consultarTodosArtigos = consultarTodosArtigos;
     this.inserirArtigo = inserirArtigo;
     this.consultarArtigoPorId = consultarArtigoPorId;
+    this.atualizarArtigo = atualizarArtigo;
 }
 
 function consultarTodosArtigos() {
@@ -30,6 +31,17 @@ function inserirArtigo(artigo) {
         });
     });
 }
+
+function atualizarArtigo(artigo) {
+    return new Promise(function (resolve, reject) {
+        artigoDao.insertNewArtigo(artigo).then(function (result) {
+            resolve(result);
+        });
+    });
+}
+
+
+
 
 
 module.exports = new Service();

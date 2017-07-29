@@ -1,10 +1,6 @@
 <aside class="col-md-10">
-  <!--<div class="page-header">
-    <h2>Editar Artigo</h2>
-  </div>-->
-
   <div class="page-header">
-    <h2>Cadastrar Artigo</h2>
+    <h2>Editar Artigo</h2>
   </div>
 
   <div [hidden]='!alertaSucesso' class="alert alert-success" role="alert">
@@ -19,7 +15,7 @@
   </div>
 
   <div class="no-margin " style="border-radius: 5px">
-    <p-editor [(ngModel)]="artigo.conteudo" [style]="{'height':'320px'}" [style]="{'height':'320px'}">
+    <p-editor [(ngModel)]="artigo.conteudo"  [style]="{'height':'320px'}" [style]="{'height':'320px'}">
       <p-header>
         <span class="ql-formats">
             <button class="ql-bold" aria-label="Bold"></button>
@@ -38,8 +34,7 @@
   </cite>
 
   <div style="margin-top: 10px">
-    <button (click)="salvarArtigo()" type="button" class="btn btn-success"><i class="fa fa-plus-square" aria-hidden="true"></i> Cadastrar</button>
-    <!--<button type="button" class="btn btn-success"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</button>-->
+    <button (click)="editarArtigo()" type="button" class="btn btn-success"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</button>
   </div>
 
 

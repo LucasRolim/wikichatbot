@@ -6,8 +6,8 @@ let Artigo = require('./../model/artigo');
 let Usuario = require('./../model/usuario');
 
 Router.post('/insertNewArtigo', function(request, response){
-    console.log("Teste");
     artigoRequest = request.body;
+    console.log(artigoRequest);
 
     var artigoObj = new Artigo();
     artigoObj.titulo = artigoRequest.titulo;
@@ -34,6 +34,15 @@ Router.get('/getArtigoById', function(request, response){
     artigoService.consultarArtigoPorId(idUser).then(function(result){
         response.json(result);
     });
+})
+
+Router.post('/updateArtigo', function(request, response){
+    artigoRequest = request.body;
+    artigoRequest.__v += 1;
+    console.log(artigoRequest);
+    artigoService.inserirArtigo(artigoRequest).then(function(result){
+        response.json(result);
+    });    
 })
 
 

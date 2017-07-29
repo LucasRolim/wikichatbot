@@ -8,6 +8,7 @@ function Dao(){
     this.consultarTodosArtigos = findAllArtigos; 
     this.consultarArtigosById = findAllArtigosById
     this.inserirArtigo = insertNewArtigo;
+    this.atualizarArtigo = updateArtigo;
 }
 
 
@@ -30,6 +31,15 @@ function findAllArtigosById(id){
 function insertNewArtigo(artigo){ 
     return new Promise(function(resolve, reject){
         artigoModel.create(artigo).then(function(result){
+            resolve(result);
+        });
+    });
+}
+
+function updateArtigo(artigo){ 
+    return new Promise(function(resolve, reject){
+        var options = { multi: true };
+        artigoModel.update({},artigo, options) .then(function(result){
             resolve(result);
         });
     });
