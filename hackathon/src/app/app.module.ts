@@ -11,13 +11,16 @@ import { CadastrarEditarArtigoComponent } from './cadastrar-editar-artigo/cadast
 import { HomeComponent } from './home/home.component';
 import { EditorModule } from 'primeng/primeng';
 import { HttpModule } from '@angular/http';
+import { CadastroUsuario }  from './cadastro-usuario/cadastro.component';
 
 
 import { AppRoutingModule } from './app.routing.module';
 import { ArtigosDestaqueComponent } from './artigos-destaque/artigos-destaque.component';
 import { LoginService } from './login/login.service';
 import { ArtigoService } from './cadastrar-editar-artigo/artigo.service';
-import { ChatComponent } from './chat/chat.component';
+
+
+import { CadastroService } from "./cadastro-usuario/cadastro.service";
 
 
 
@@ -29,6 +32,7 @@ import { ChatComponent } from './chat/chat.component';
     CadastrarEditarArtigoComponent,
     HomeComponent,
     ChatComponent,
+    CadastroUsuario,
     ArtigosDestaqueComponent
   ],
   imports: [
@@ -41,7 +45,8 @@ import { ChatComponent } from './chat/chat.component';
   ],
   providers: [
     LoginService,
-    ArtigoService
+    ArtigoService,
+    CadastroService
   ],
   bootstrap: [AppComponent]
 })
