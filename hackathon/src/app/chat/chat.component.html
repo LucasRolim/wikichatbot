@@ -1,5 +1,5 @@
 <div style="border-radius: 5px">
-  <section style=" background: rgba(128, 128, 128, 0.42);border: 1px solid rgba(128, 128, 128, 0.53); height: 40px;width: 350px;border-radius: 5px;font-weight: bold;padding: 5px;">
+  <section style=" background: rgba(128, 128, 128, 0.42);border: 1px solid rgba(128, 128, 128, 0.53); height: 40px;width: 350px;border-top-left-radius: 5px; border-top-right-radius: 5px;font-weight: bold;padding: 5px;">
     Wiki - RPA - Santander
     <a style="float: right;padding-right: 10px;">
       <span (click)="showOrHide('minimizar')" *ngIf="!mostrarMensagens" class="glyphicon glyphicon-minus" style="font-weight: bold" id="minimizar" title="Minimizar"> </span>
@@ -10,7 +10,7 @@
       <img src='https://dfsuknfbz46oq.cloudfront.net/p/icons/skype.png' width="20px" height="20px" title="Adicionar no Skype"/>
     </a>
   </section>
-  <section style="background-color:#FFFFFF; height: 350px;padding:5px;overflow: auto;border: 1px solid rgba(128, 128, 128, 0.53);margin-bottom:5px;margin-top:5px"
+  <section style="background-color:#FFFFFF; height: 350px;padding:5px;overflow: auto;border: 1px solid rgba(128, 128, 128, 0.53);margin-bottom:5px"
     [ngClass]="classMensagem">
 
     <p class="mensagem" *ngFor="let mensagem of mensagens" [class.bot]="mensagem.bot"><span style="font-weight: bold" [innerHtml]="mensagem.autor"></span><span [innerHtml]="mensagem.texto"></span></p>
@@ -18,7 +18,9 @@
   </section>
 
   <div class="input-group">
-    <input (keyup.enter)="sendMensagem()" class="form-control" #msg (keyup)="onKey(msg.value)" type="text" style="border-radius:5px"
+    <input (keyup.enter)="sendMensagem()" class="form-control" #msg 
+      [(ngModel)]="mensagem" 
+      (keyup)="onKey(msg.value)" type="text" style="border-radius:5px"
       [ngClass]="classMensagem">
     <button class="input-group-addon" (click)="sendMensagem()" id="basic-addon2" [ngClass]="classMensagem">Send</button>
   </div>
