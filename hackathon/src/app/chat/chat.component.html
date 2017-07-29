@@ -1,6 +1,17 @@
 <div style="border-radius: 5px">
-  <section style=" background: rgba(128, 128, 128, 0.42);border: 1px solid rgba(128, 128, 128, 0.53);;height: 40px;width: 350px;border-radius: 5px;font-weight: bold;padding: 5px;">
-    Wiki - RPA <a (click)="showOrHide()" style="float: right;padding-right: 5px;"><span class="glyphicon glyphicon-minus" style="font-weight: bold"> -- </span></a>
+    <section style=" background: rgba(128, 128, 128, 0.42);border: 1px solid rgba(128, 128, 128, 0.53);;height: 40px;width: 350px;border-radius: 5px;font-weight: bold;padding: 5px;">
+    Wiki - RPA - Santander
+    
+    
+    
+    <a  style="float: right;padding-right: 10px;">
+      <span (click)="showOrHide('minimizar')" *ngIf="!mostrarMensagens" class="glyphicon glyphicon-minus" style="font-weight: bold" id="minimizar" title="Minimizar"> </span>
+      <span (click)="showOrHide('maximizar')" *ngIf="mostrarMensagens" class="glyphicon glyphicon-plus" style="font-weight: bold" id="maximizar" title="Maximizar"> </span>
+    </a>
+    
+    <a href='https://join.skype.com/bot/56d64838-2576-4efd-a842-85f5b95fe70d' style="float: right;padding-right: 20px;" target="_new">
+      <img src='https://dfsuknfbz46oq.cloudfront.net/p/icons/skype.png' width="20px" height="20px" title="Adicionar no Skype"/>
+    </a>
   </section>
   <section style="height: 350px;padding:5px;overflow: auto;border: 1px solid rgba(128, 128, 128, 0.53);margin-bottom:5px;margin-top:5px"
     [ngClass]="classMensagem" >
