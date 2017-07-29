@@ -17,6 +17,8 @@ import { AppRoutingModule } from './app.routing.module';
 import { ArtigosDestaqueComponent } from './artigos-destaque/artigos-destaque.component';
 import { LoginService } from './login/login.service';
 import { ArtigoService } from './cadastrar-editar-artigo/artigo.service';
+import { ChatComponent } from './chat/chat.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +26,7 @@ import { ArtigoService } from './cadastrar-editar-artigo/artigo.service';
     CompararArtigoComponent,
     CadastrarEditarArtigoComponent,
     HomeComponent,
+    ChatComponent,
     ArtigosDestaqueComponent
   ],
   imports: [

@@ -1,0 +1,20 @@
+<div style="border-radius: 5px">
+  <section style=" background: rgba(128, 128, 128, 0.42);border: 1px solid rgba(128, 128, 128, 0.53);;height: 40px;width: 350px;border-radius: 5px;font-weight: bold;padding: 5px;">
+    Wiki - RPA <a (click)="showOrHide()" style="float: right;padding-right: 5px;"><span class="glyphicon glyphicon-minus" style="font-weight: bold"> -- </span></a>
+  </section>
+  <section style="height: 350px;padding:5px;overflow: auto;border: 1px solid rgba(128, 128, 128, 0.53);margin-bottom:5px;margin-top:5px"
+    [ngClass]="classMensagem" >
+
+    <p *ngFor="let mensagem of mensagens"><span style="font-weight: bold">WIKI Mock: </span>{{ mensagem }}</p>
+
+  </section>
+
+  <div class="input-group">
+    <input class="form-control" #msg (keyup)="onKey(msg.value)" type="text" style="border-radius:5px" [ngClass]="classMensagem">
+    <button class="input-group-addon" (click)="sendMensagem()" id="basic-addon2" [ngClass]="classMensagem">Send</button> 
+  </div>
+
+  <div>
+  </div>
+
+</div>
