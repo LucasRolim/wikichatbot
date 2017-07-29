@@ -1,6 +1,6 @@
 'use-restrict'
 let mongoose = require('mongoose');
-let uri = "mongodb://localhost:27017/hackathon"
+let uri = "mongodb://localhost:27017/novo"
 
 function MongooseUtil(){
     this.abrirConexao = connectDataBase;

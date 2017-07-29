@@ -14,9 +14,6 @@ export class HomeComponent {
 
   constructor(private http: HttpClient) {}
 
-
-
-
   decodeHtml(html) {
       let txt = document.createElement('textarea');
       txt.innerHTML = html;

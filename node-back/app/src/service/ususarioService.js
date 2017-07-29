@@ -34,6 +34,7 @@ function autenticarUsuario(email, senha) {
 }
 
 function inserirUsuario(usuario) {
+    console.log(usuario);
     return new Promise(function (resolve, reject) {
         usuarioDao.inserirUsuario(usuario).then(function (result) {
             resolve(result);

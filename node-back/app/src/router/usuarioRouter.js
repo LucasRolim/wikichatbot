@@ -12,6 +12,7 @@ Router.post('/insertNewUser', function(request, response){
     usuarioObj.email = usuarioRequest.email;
     usuarioObj.senha = usuarioRequest.senha;
 
+    console.log(usuarioObj);
     usuarioService.inserirUsuario(usuarioObj).then(function(result){
         response.json(result);
     });    

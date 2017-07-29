@@ -19,13 +19,15 @@ function findAllUsuario(){
         });
     });
 }
-
-function insertNewUser(usuario){ 
+  
+function insertNewUser(usuario){     
+    console.log("Node 1");
+    console.log(usuario);
     return new Promise(function(resolve, reject){
-        usuarioModel.create(usuario).then(function(result){
-            resolve(result);
+        usuarioModel.create(usuario).then((result)=>{
+            console.log(result);
         });
-    });
+    })
 }
 
 function findUserById(id){ 
