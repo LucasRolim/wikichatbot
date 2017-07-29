@@ -57,6 +57,7 @@ export class ChatComponent implements OnInit {
     this.mensagens.push({
       texto: this.mensagem
     });
+    this.scroll();
     this.mensagem = '';
     this.http.post(
       'https://westus.api.cognitive.microsoft.com/qnamaker/v2.0/knowledgebases/e457b816-d76b-4571-b979-74a5ef293cf3/generateAnswer',
@@ -71,7 +72,15 @@ export class ChatComponent implements OnInit {
           bot: true
         });
         this.resposta = '';
+        this.scroll();
     });
+
+  }
+
+  scroll() {
+
+    let objDiv = document.getElementById("areaChat");
+    objDiv.scrollTop = objDiv.scrollHeight;
 
   }
 

@@ -10,7 +10,7 @@
       <img src='https://dfsuknfbz46oq.cloudfront.net/p/icons/skype.png' width="20px" height="20px" title="Adicionar no Skype"/>
     </a>
   </section>
-  <section style="background-color:#FFFFFF; height: 350px;padding:5px;overflow: auto;border: 1px solid rgba(128, 128, 128, 0.53);margin-bottom:5px"
+  <section id="areaChat" style="background-color:#FFFFFF; height: 350px;padding:5px;overflow: auto;border: 1px solid rgba(128, 128, 128, 0.53);margin-bottom:5px"
     [ngClass]="classMensagem">
 
     <p class="mensagem" *ngFor="let mensagem of mensagens" [class.bot]="mensagem.bot"><span style="font-weight: bold" [innerHtml]="mensagem.autor"></span><span [innerHtml]="mensagem.texto"></span></p>

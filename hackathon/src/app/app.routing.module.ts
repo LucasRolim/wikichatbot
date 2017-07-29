@@ -9,7 +9,7 @@ import { CompararArtigoComponent } from './comparar-artigo/comparar-artigo.compo
 const routes: Routes = [
   {
     path: '',
-    component : HomeComponent
+    component : ArtigosDestaqueComponent
   },
   {
     path: 'cadastrarArtigo',
