@@ -21,8 +21,12 @@ export class ChatComponent implements OnInit {
   ngOnInit() {
     this.mostrarMensagens = true;
     this.showOrHide();
-    this.mensagem = 'Rock';
-    this.sendMensagem();
+    // this.mensagem = 'Rock';
+    // this.sendMensagem();
+    this.mensagens.push({
+      texto: 'Olá, em que posso ajudar?',
+      bot: true
+    });
   }
 
   showOrHide() {
