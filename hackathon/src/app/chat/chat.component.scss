@@ -1,3 +1,29 @@
 .hideMensagem{
     display: none;
 }
+.input-group{
+    width: 100%;
+    input{
+        width: 70%;
+        margin-right: 5%;
+    }
+    button{
+        width:20%;
+        border: 5px;
+        border-radius: 5px;
+        margin: 3px;
+    }
+}
+.mensagem{
+    text-align: right;
+    background-color: #eeFFee;
+    border: 1px solid #efefef;
+    padding: 10px;
+    margin-left: 20%;
+}
+.bot{
+    text-align: left;
+    background-color: #FFFFFF;
+    margin-left: 0px;
+    margin-right: 20%;
+}

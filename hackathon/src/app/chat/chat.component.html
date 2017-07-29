@@ -5,12 +5,12 @@
   <section style="height: 350px;padding:5px;overflow: auto;border: 1px solid rgba(128, 128, 128, 0.53);margin-bottom:5px;margin-top:5px"
     [ngClass]="classMensagem" >
 
-    <p *ngFor="let mensagem of mensagens"><span style="font-weight: bold">WIKI Mock: </span>{{ mensagem }}</p>
+    <p class="mensagem" *ngFor="let mensagem of mensagens" [class.bot]="mensagem.bot"><span style="font-weight: bold" [innerHtml]="mensagem.autor"></span><span [innerHtml]="mensagem.texto"></span></p>
 
   </section>
 
   <div class="input-group">
-    <input class="form-control" #msg (keyup)="onKey(msg.value)" type="text" style="border-radius:5px" [ngClass]="classMensagem">
+    <input (keyup.enter)="sendMensagem()" class="form-control" #msg (keyup)="onKey(msg.value)" type="text" style="border-radius:5px" [ngClass]="classMensagem">
     <button class="input-group-addon" (click)="sendMensagem()" id="basic-addon2" [ngClass]="classMensagem">Send</button> 
   </div>
 

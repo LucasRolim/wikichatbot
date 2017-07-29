@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-chat',
@@ -7,36 +8,69 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatComponent implements OnInit {
 
-  mostrarMensagens : boolean = false;
-  classMensagem = {hideMensagem : true};
+  mostrarMensagens = false;
+  classMensagem = { hideMensagem : true };
 
-  mensagens : any = [];
-  mensagem : string = "";
+  mensagens: any = [];
+  mensagem = '';
+  pergunta = '';
+  resposta = '';
 
-  constructor() {
-  }
+  constructor(private http: HttpClient) { }
 
   ngOnInit() {
+    this.mostrarMensagens = true;
+    this.showOrHide();
+    this.mensagem = 'Rock';
+    this.sendMensagem();
   }
 
-  showOrHide(){
-    if(this.mostrarMensagens){
+  showOrHide() {
+    if (this.mostrarMensagens) {
       this.mostrarMensagens = false;
       this.classMensagem.hideMensagem = false;
-    }else{
+    }else {
       this.classMensagem.hideMensagem = true;
       this.mostrarMensagens = true;
     }
   }
 
-  sendMensagem(){
-    console.log(this.mensagem);
-    this.mensagens.push(this.mensagem);
-    this.mensagem = "";
-  }
-
   onKey(value: string) {
     this.mensagem = value;
+  }
+
+  decodeHtml(html) {
+      let txt = document.createElement('textarea');
+      txt.innerHTML = html;
+      return txt.value;
+  }
+  sendMensagem() {
+    if (this.mensagem === '') {
+      return;
+    }
+    this.pergunta = this.mensagem;
+    const body = {
+      question: this.pergunta
+    };
+    this.mensagens.push({
+      texto: this.mensagem
+    });
+    this.mensagem = '';
+    this.http.post(
+      'https://westus.api.cognitive.microsoft.com/qnamaker/v2.0/knowledgebases/e457b816-d76b-4571-b979-74a5ef293cf3/generateAnswer',
+      body,
+      {
+        headers: new HttpHeaders().set('Ocp-Apim-Subscription-Key', '0e60521366b7410b8096b18787e7597e'),
+      }).subscribe(data => {
+        // Read the result field from the JSON response.
+        this.resposta = this.decodeHtml(data['answers'][0]['answer']);
+        this.mensagens.push({
+          texto: this.resposta,
+          bot: true
+        });
+        this.resposta = '';
+    });
+
   }
 
 }
