@@ -1,0 +1,35 @@
+<!--The content below is only a placeholder and can be replaced.--> 
+<div style="width:500px;height:200px;">
+
+<div style="text-align:center">
+  <h1>
+    Cadastrar Usuário
+  </h1>
+</div>    
+
+<div class="modal-body">
+      
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">Nome</span>
+        <input type="text" class="form-control" placeholder="digite seu Nome" [(ngModel)]="nome" aria-describedby="basic-addon1">
+      </div>
+      <div><p></p></div>
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">E-mail</span>
+        <input type="email" class="form-control" placeholder="digite seu email" [(ngModel)]="email" aria-describedby="basic-addon1">
+      </div>
+
+      <div class="input-group" style="margin-top: 10px ">
+        <span class="input-group-addon" id="basic-addon1">Senha</span>
+        <input type="password" class="form-control" placeholder="digite sua senha" [(ngModel)]="senha" aria-describedby="basic-addon1">
+      </div>
+
+    </div>
+    <div style="align: center;">
+    <div class="container-fluid" style="text-align: right; margin-bottom: 10px; align:center;">
+      <button type="button" class="btn btn-primary" (click)="cadastrar()">Cadastrar</button>
+      <button type="button" id="cancelar" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+    </div>
+    </div>
+
+</div>

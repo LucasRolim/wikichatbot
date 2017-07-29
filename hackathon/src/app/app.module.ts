@@ -18,6 +18,9 @@ import { ArtigosDestaqueComponent } from './artigos-destaque/artigos-destaque.co
 import { LoginService } from './login/login.service';
 import { ArtigoService } from './cadastrar-editar-artigo/artigo.service';
 import { ChatComponent } from './chat/chat.component';
+import { CadastroUsuario }  from './cadastro-usuario/cadastro.component';
+import { CadastroService } from "./cadastro-usuario/cadastro.service";
+
 
 @NgModule({
   declarations: [
@@ -27,7 +30,9 @@ import { ChatComponent } from './chat/chat.component';
     CadastrarEditarArtigoComponent,
     HomeComponent,
     ChatComponent,
-    ArtigosDestaqueComponent
+    ArtigosDestaqueComponent,
+    CadastroUsuario,
+    CadastroService
   ],
   imports: [
     BrowserModule,
