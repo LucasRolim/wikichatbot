@@ -1,0 +1,13 @@
+.chat{
+    padding: 20px;
+    border: 1px solid #999;
+}
+.mensagem{
+    text-align: right;
+}
+.bot{
+    text-align: left;
+    font-weight: bold;
+}
+.pergunta{
+}
