@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+//import { UUID } from 'angular2-uuid';
 
 @Component({
   selector: 'app-chat',
@@ -58,7 +59,7 @@ export class ChatComponent implements OnInit {
       texto: this.mensagem
     });
     this.scroll();
-    this.mensagem = '';
+    //this.mensagem = '';
     this.http.post(
       'https://westus.api.cognitive.microsoft.com/qnamaker/v2.0/knowledgebases/e457b816-d76b-4571-b979-74a5ef293cf3/generateAnswer',
       body,
@@ -73,8 +74,8 @@ export class ChatComponent implements OnInit {
         });
         this.resposta = '';
         this.scroll();
+        this.avaliar();
     });
-
   }
 
   scroll() {
@@ -83,5 +84,37 @@ export class ChatComponent implements OnInit {
     objDiv.scrollTop = objDiv.scrollHeight;
 
   }
+  avaliar(){
+      if (this.mensagem === '') {
+        return;
+      }
 
+      this.pergunta = this.mensagem;
+
+      const body = {
+        "documents": [
+          {
+            "language": "pt",
+            "id": 2,
+            "text": this.pergunta
+          }
+        ]
+      };
+      this.mensagens.push({
+        texto: this.mensagem
+      });
+      this.scroll();
+      this.mensagem = '';
+      this.http.post(
+        'https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/sentiment',
+        body,
+        {
+          headers: new HttpHeaders()
+              .set('Ocp-Apim-Subscription-Key', 'dac926182154495b8564d322c751584a')
+              .set('Content-Type', 'application/json'),
+        }).subscribe(data => {
+          this.resposta = this.decodeHtml(data['documents'][0]['score']);
+          alert("Análise de sentimento: " + this.resposta);
+      });
+  }
 }

@@ -18,8 +18,8 @@
   </section>
 
   <div class="input-group">
-    <input (keyup.enter)="sendMensagem()" class="form-control" #msg 
-      [(ngModel)]="mensagem" 
+    <input (keyup.enter)="sendMensagem()" class="form-control" #msg
+      [(ngModel)]="mensagem"
       (keyup)="onKey(msg.value)" type="text" style="border-radius:5px"
       [ngClass]="classMensagem">
     <button class="input-group-addon" (click)="sendMensagem()" id="basic-addon2" [ngClass]="classMensagem">Send</button>
