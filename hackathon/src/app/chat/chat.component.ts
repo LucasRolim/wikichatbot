@@ -115,7 +115,6 @@ export class ChatComponent implements OnInit {
         }).subscribe(data => {
           this.resposta = this.decodeHtml(data['documents'][0]['score']);
           alert("Análise de sentimento: " + this.resposta);
-
       });
   }
 }
