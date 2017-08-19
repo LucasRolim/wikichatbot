@@ -20,7 +20,11 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    //verificar se ja esta conectado com fb
+    
+    if (window.location.href.indexOf("code") != -1){
+      this.loginFacebook();
+    }
+   
   }
 
   login(){
@@ -37,26 +41,25 @@ export class LoginComponent implements OnInit {
   }
 //Get profile from facebook
   getFaceBookProfile(code:string){
-    
     this.loginService.getAccessToken(code).subscribe(oathAccessData => {
       this.loginService.getUserFacebookProfile(oathAccessData.access_token).subscribe(profile => {
-      
+        window.sessionStorage.setItem("usuariologado", "true");
         window.sessionStorage.setItem("usuarioNome", profile.name);
         window.sessionStorage.setItem("usuarioEmail", profile.email);
         window.sessionStorage.setItem("usuarioImg", profile.picture.data.url);
         window.sessionStorage.setItem("usuarioId", profile.id);
       
-        console.log(profile.name +"_"+ profile.email +"_"+ profile.picture.data.url +"_"+ "facebook" +"_"+ profile.id);},err => { console.log(err); });},err => { console.log(err);});
+        },err => { console.log(err); });},err => { console.log(err);});
         
         this.eventLogin.emit({usuarioLogado: true});
-        document.getElementById('cancelar').click();
+        //document.getElementById('cancelar').click();
         this.router.navigate(['/']);
   }
 
   requestPermission(){
     window.open(
       'https://www.facebook.com/v2.10/dialog/oauth?client_id=1289606537817398&redirect_uri=http://localhost:4200/',
-      '_self'
+      "_self"
     );
   }
 
