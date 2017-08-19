@@ -15,7 +15,13 @@ export class ChatComponent implements OnInit {
   mensagens: any = [];
   mensagem = '';
   pergunta = '';
-  resposta = '';
+  resposta = 'Olá, em que posso ajudar?';
+  machineQuestion = '';
+  sentimentAnalysisJson = { body: { datetime: new Date(), analysisAvg: new Number(), analysis:[] } };
+  sentimentAnalysisBody = { };
+  sentmentAnalysisCount: number = 0;
+  sentimentAvg: number = parseFloat('0.000000');
+
 
   constructor(private http: HttpClient) { }
 
@@ -23,7 +29,7 @@ export class ChatComponent implements OnInit {
     this.mostrarMensagens = true;
     this.showOrHide();
     this.mensagens.push({
-      texto: 'Olá, em que posso ajudar?',
+      texto: this.resposta,
       bot: true
     });
   }
@@ -58,8 +64,13 @@ export class ChatComponent implements OnInit {
     this.mensagens.push({
       texto: this.mensagem
     });
+
     this.scroll();
-    //this.mensagem = '';
+
+    if(this.machineQuestion == '')
+      this.machineQuestion = this.resposta;
+
+    this.resposta = '';
     this.http.post(
       'https://westus.api.cognitive.microsoft.com/qnamaker/v2.0/knowledgebases/e457b816-d76b-4571-b979-74a5ef293cf3/generateAnswer',
       body,
@@ -67,12 +78,13 @@ export class ChatComponent implements OnInit {
         headers: new HttpHeaders().set('Ocp-Apim-Subscription-Key', '0e60521366b7410b8096b18787e7597e'),
       }).subscribe(data => {
         // Read the result field from the JSON response.
+
         this.resposta = this.decodeHtml(data['answers'][0]['answer']);
         this.mensagens.push({
           texto: this.resposta,
           bot: true
         });
-        this.resposta = '';
+
         this.scroll();
         this.avaliar();
     });
@@ -89,32 +101,67 @@ export class ChatComponent implements OnInit {
         return;
       }
 
-      this.pergunta = this.mensagem;
+      var previousRobotMessage = '';
 
       const body = {
         "documents": [
           {
             "language": "pt",
             "id": 2,
-            "text": this.pergunta
+            "text": this.mensagem
           }
         ]
       };
-      this.mensagens.push({
-        texto: this.mensagem
-      });
-      this.scroll();
-      this.mensagem = '';
+
       this.http.post(
         'https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/sentiment',
         body,
         {
           headers: new HttpHeaders()
-              .set('Ocp-Apim-Subscription-Key', 'dac926182154495b8564d322c751584a')
+              .set('Ocp-Apim-Subscription-Key', '9b00358d13d44cdaab9656a85312b312')
               .set('Content-Type', 'application/json'),
         }).subscribe(data => {
-          this.resposta = this.decodeHtml(data['documents'][0]['score']);
-          alert("Análise de sentimento:  " + this.resposta);
+
+          var sentimentAnalysis = this.decodeHtml(data['documents'][0]['score']);
+          this.sentimentAvg = this.sentimentAvg + parseFloat(sentimentAnalysis);
+
+          console.log("Pergunta da máquina: " + this.machineQuestion);
+          console.log(this.sentimentAvg);
+          console.log(parseFloat(sentimentAnalysis));
+          console.log("Resposta da pessoa: " + this.mensagem);
+          console.log("Análise de sentimento:  " + sentimentAnalysis);
+
+          this.sentimentAnalysisBody[this.sentmentAnalysisCount] = {
+              question:this.machineQuestion,
+              answer:this.mensagem,
+              sentimentOverAnswer: sentimentAnalysis
+          };
+
+          this.sentmentAnalysisCount++;
+
+          console.log(this.sentimentAnalysisBody);
+
+          this.machineQuestion = '';
       });
+  }
+
+  finalizarAtendimento(){
+    this.sentimentAnalysisJson.body.analysis.push(this.sentimentAnalysisBody);
+    this.sentimentAnalysisJson.body.analysisAvg =  (this.sentimentAvg / this.sentmentAnalysisCount) ;
+
+    console.log(this.sentimentAnalysisJson.body.analysisAvg);
+    console.log(this.sentimentAvg);
+    console.log(this.sentimentAnalysisJson);
+    console.log(JSON.stringify(this.sentimentAnalysisJson));
+
+    this.http.post('http://localhost:8080/historico-chat/',
+    this.sentimentAnalysisJson,
+    {
+      headers: new HttpHeaders()
+      .set('Content-Type', 'application/json'),
+    })
+    .subscribe(data => {
+        console.log(JSON.stringify(data));
+    });
   }
 }

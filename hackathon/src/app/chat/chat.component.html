@@ -23,6 +23,7 @@
       (keyup)="onKey(msg.value)" type="text" style="border-radius:5px"
       [ngClass]="classMensagem">
     <button class="input-group-addon" (click)="sendMensagem()" id="basic-addon2" [ngClass]="classMensagem">Send</button>
+    <button class="input-group-addon" (click)="finalizarAtendimento()" id="basic-addon2" [ngClass]="classMensagem">Finalizar</button>
   </div>
 
   <div>
