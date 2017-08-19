@@ -12,8 +12,8 @@ export class AppComponent {
   usuarioLogado: Usuario;
 
   ngOnInit() {
-    console.log(window.sessionStorage.getItem("usuariologado"));
     this.isUsuarioLogado();
+
   }
 
   isUsuarioLogado(){

@@ -20,10 +20,11 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    console.log(window.location.href.indexOf("code") );
     if (window.location.href.indexOf("code") != -1){
       this.loginFacebook();
     }
+    console.log(window.location.href.indexOf("code") );
    
   }
 
@@ -51,8 +52,6 @@ export class LoginComponent implements OnInit {
       
         },err => { console.log(err); });},err => { console.log(err);});
         
-        this.eventLogin.emit({usuarioLogado: true});
-        //document.getElementById('cancelar').click();
         this.router.navigate(['/']);
   }
 
