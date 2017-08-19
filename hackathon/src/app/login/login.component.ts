@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { Usuario } from './usuario';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,12 +14,13 @@ export class LoginComponent implements OnInit {
   email: string;
   senha: string;
 
-  @Output() eventLogin = new EventEmitter();;
+  @Output() eventLogin = new EventEmitter();
 
   constructor(private loginService: LoginService, private router : Router) {
   }
 
   ngOnInit() {
+    //verificar se ja esta conectado com fb
   }
 
   login(){
@@ -31,6 +33,38 @@ export class LoginComponent implements OnInit {
         document.getElementById('cancelar').click();//Fechar o Modal
         this.router.navigateByUrl("/");
     });
+
+  }
+//Get profile from facebook
+  getFaceBookProfile(code:string){
+    
+    this.loginService.getAccessToken(code).subscribe(oathAccessData => {
+      this.loginService.getUserFacebookProfile(oathAccessData.access_token).subscribe(profile => {
+      
+        window.sessionStorage.setItem("usuarioNome", profile.name);
+        window.sessionStorage.setItem("usuarioEmail", profile.email);
+        window.sessionStorage.setItem("usuarioImg", profile.picture.data.url);
+        window.sessionStorage.setItem("usuarioId", profile.id);
+      
+        console.log(profile.name +"_"+ profile.email +"_"+ profile.picture.data.url +"_"+ "facebook" +"_"+ profile.id);},err => { console.log(err); });},err => { console.log(err);});
+        
+        this.eventLogin.emit({usuarioLogado: true});
+        document.getElementById('cancelar').click();
+        this.router.navigate(['/']);
+  }
+
+  requestPermission(){
+    window.open(
+      'https://www.facebook.com/v2.10/dialog/oauth?client_id=1289606537817398&redirect_uri=http://localhost:4200/',
+      '_self'
+    );
+  }
+
+  loginFacebook(){
+    if (window.location.href.indexOf("code") > -1){
+      var code = window.location.href.substring(window.location.href.indexOf("?") + 1).split('&')[0].split('=')[1];
+      this.getFaceBookProfile(code);
+    }
 
   }
 

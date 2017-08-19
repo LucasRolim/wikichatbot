@@ -18,6 +18,7 @@ import { AppRoutingModule } from './app.routing.module';
 import { ArtigosDestaqueComponent } from './artigos-destaque/artigos-destaque.component';
 import { LoginService } from './login/login.service';
 import { ArtigoService } from './cadastrar-editar-artigo/artigo.service';
+import { ConfigService } from './core/services/config.service';
 
 import { CadastroService } from "./cadastro-usuario/cadastro.service";
 import { ChatComponent } from './chat/chat.component';
@@ -34,7 +35,7 @@ import { EditarArtigoComponent } from './cadastrar-editar-artigo/editar-artigo/e
     ChatComponent,
     CadastroUsuario,
     ArtigosDestaqueComponent,
-	EditarArtigoComponent
+    EditarArtigoComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +48,8 @@ import { EditarArtigoComponent } from './cadastrar-editar-artigo/editar-artigo/e
   providers: [
     LoginService,
     ArtigoService,
-    CadastroService
+    CadastroService,
+    ConfigService
   ],
   bootstrap: [AppComponent]
 })
