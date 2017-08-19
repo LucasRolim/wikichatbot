@@ -13,22 +13,24 @@ export class AppComponent {
 
   ngOnInit() {
     this.isUsuarioLogado();
+
   }
 
   isUsuarioLogado(){
-    var logado = window.sessionStorage.getItem("usuarioNome");
+    var logado = window.sessionStorage.getItem("usuariologado");
     if(logado){
-      this.logarUsuario(true);
+      this.logarUsuario();
     }else{
       this.logout();
     }
   }
 
-  logarUsuario(usuario){
+  logarUsuario(){
     this.usuarioLogado = new Usuario();
-    this.usuarioLogado.logado = usuario.usuarioLogado;
+    this.usuarioLogado.logado = window.sessionStorage.getItem("usuariologado") == "true" ? true : false;
     this.usuarioLogado.nomeUsuario = window.sessionStorage.getItem("usuarioNome");
     this.usuarioLogado.tokenUsuario = window.sessionStorage.getItem("usuarioToken");
+    this.usuarioLogado.pictureDataUrl = window.sessionStorage.getItem("usuarioImg");
     console.log(this.usuarioLogado)
   }
 
@@ -37,5 +39,11 @@ export class AppComponent {
     this.usuarioLogado.logado = false;
     window.sessionStorage.clear()
 
+  }
+  requestPermission(){
+    window.open(
+      'https://www.facebook.com/v2.10/dialog/oauth?client_id=1289606537817398&redirect_uri=http://localhost:4200/',
+      '_self', "width=400,height=400"
+    );
   }
 }
